@@ -15,12 +15,12 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { Button } from "@nextui-org/button";
+import Image from "next/image";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
 import { SearchIcon, Logo } from "@/src/components/icons";
-import logo from "../assets/logo.png";
-import Image from "next/image";
+import logo from "../../assets/logo.png";
 
 export const Navbar = () => {
   const searchInput = (
@@ -46,7 +46,7 @@ export const Navbar = () => {
 
   return (
     <NextUINavbar
-      className="bg-gradient-to-r from-customColor1 to-customColor2 dark:bg-gradient-to-r dark:from-default-100 dark:to-default-50"
+      className="bg-gradient-to-r from-customColor1 to-customColor2 dark:bg-gradient-to-r dark:from-default-100 dark:to-default-200"
       maxWidth="xl"
       position="sticky"
     >
