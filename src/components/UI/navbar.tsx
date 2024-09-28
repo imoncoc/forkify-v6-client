@@ -16,6 +16,14 @@ import NextLink from "next/link";
 import clsx from "clsx";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
+import { Avatar } from "@nextui-org/avatar";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/dropdown";
+import { usePathname } from "next/navigation";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
@@ -23,6 +31,7 @@ import { SearchIcon, Logo } from "@/src/components/icons";
 import logo from "../../assets/logo.png";
 
 export const Navbar = () => {
+  const pathname = usePathname();
   const searchInput = (
     <Input
       aria-label="Search"
@@ -65,12 +74,9 @@ export const Navbar = () => {
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
+            <NavbarItem key={item.href} isActive={item.href === pathname}>
               <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
+                className={clsx(linkStyles({ color: "foreground" }))}
                 color="foreground"
                 href={item.href}
               >
@@ -92,9 +98,39 @@ export const Navbar = () => {
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
           <Link href="/login">
-            <Button className="bg-white text-black shadow-lg">Login</Button>
+            <Button className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold">
+              Login
+            </Button>
           </Link>
         </NavbarItem>
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <Avatar
+              isBordered
+              as="button"
+              className="transition-transform"
+              color="warning"
+              name="Jason Hughes"
+              size="sm"
+              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold">zoey@example.com</p>
+            </DropdownItem>
+            <DropdownItem key="settings">My Settings</DropdownItem>
+            <DropdownItem key="team_settings">Team Settings</DropdownItem>
+            <DropdownItem key="analytics">Analytics</DropdownItem>
+            <DropdownItem key="system">System</DropdownItem>
+            <DropdownItem key="configurations">Configurations</DropdownItem>
+            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="logout" color="danger">
+              Log Out
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
