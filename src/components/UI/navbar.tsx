@@ -30,9 +30,17 @@ import { ThemeSwitch } from "@/src/components/theme-switch";
 import { SearchIcon, Logo } from "@/src/components/icons";
 import logo from "../../assets/logo.png";
 import { logout } from "@/src/services/AuthService";
+import { useUser } from "@/src/context/user.provider";
 
 export const Navbar = () => {
+  const { user, setIsLoading: userLoading } = useUser();
   const pathname = usePathname();
+
+  const handleLogout = () => {
+    logout();
+    userLoading(true);
+  };
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -97,43 +105,57 @@ export const Navbar = () => {
         </NavbarItem>
 
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link href="/login">
-            <Button className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold">
-              Login
-            </Button>
-          </Link>
-        </NavbarItem>
-        <Dropdown placement="bottom-end">
-          <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform"
-              color="warning"
-              name="Jason Hughes"
-              size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
-            </DropdownItem>
-            <DropdownItem key="settings" href="/profile">
-              Profile
-            </DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem onClick={() => logout()} key="logout" color="danger">
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        {!user && (
+          <>
+            <NavbarItem className="hidden sm:flex gap-2">
+              <Link href="/login">
+                <Button className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold">
+                  Login
+                </Button>
+              </Link>
+            </NavbarItem>
+          </>
+        )}
+        {user && (
+          <>
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="warning"
+                  name="Jason Hughes"
+                  size="sm"
+                  src={user.profilePhoto}
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">{user?.email}</p>
+                </DropdownItem>
+                <DropdownItem key="settings" href="/profile">
+                  Profile
+                </DropdownItem>
+                <DropdownItem key="team_settings">Team Settings</DropdownItem>
+                <DropdownItem key="analytics">Analytics</DropdownItem>
+                <DropdownItem key="system">System</DropdownItem>
+                <DropdownItem key="configurations">Configurations</DropdownItem>
+                <DropdownItem key="help_and_feedback">
+                  Help & Feedback
+                </DropdownItem>
+                <DropdownItem
+                  onClick={handleLogout}
+                  key="logout"
+                  color="danger"
+                >
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

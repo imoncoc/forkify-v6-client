@@ -13,3 +13,17 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+
+export interface IUser {
+  _id?: string;
+  userId?: string;
+  name: string;
+  role: string;
+  email: string;
+  status: string;
+  phone: string;
+  profilePhoto: string;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+}
