@@ -39,8 +39,8 @@ const register = () => {
     <>
       {isPending && <Loading />}
       <div className="flex h-[calc(100vh-100px)] flex-col items-center justify-center bg-gradient-to-r from-customColor1/10 to-customColor2/10 dark:bg-gradient-to-r dark:from-default-100 dark:to-default-50">
-        <h3 className="my-2 text-xl font-bold">Register with FoundX</h3>
-        <p className="mb-4">Help Lost Items Find Their Way Home</p>
+        <h3 className="my-2 text-xl font-bold">Register with Forkify</h3>
+        <p className="mb-4">Connecting Food Lovers Through Shared Recipes</p>
         <div className="w-[80%] md:w-[60%] lg:w-[50%] xl:w-[35%]">
           <FXForm
             //! Only for development

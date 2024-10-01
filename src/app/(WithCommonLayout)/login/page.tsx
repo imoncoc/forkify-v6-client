@@ -40,7 +40,7 @@ const LoginPage = () => {
     <>
       {isPending && <Loading />}
       <div className="flex h-[calc(100vh-100px)] pt-10 w-full flex-col items-center justify-center bg-gradient-to-r from-customColor1/10 to-customColor2/10 dark:bg-gradient-to-r dark:from-default-100 dark:to-default-50">
-        <h3 className="my-2 text-2xl font-bold">Login with FoundX</h3>
+        <h3 className="my-2 text-2xl font-bold">Login with Forkify</h3>
         <p className="mb-4">Welcome Back! Let&lsquo;s Get Started</p>
         <div className="w-[80%] md:w-[60%] lg:w-[50%] xl:w-[35%]">
           <FXForm

@@ -23,7 +23,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
@@ -35,10 +35,12 @@ import { useUser } from "@/src/context/user.provider";
 export const Navbar = () => {
   const { user, setIsLoading: userLoading } = useUser();
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
     userLoading(true);
+    router.push("/");
   };
 
   const searchInput = (
@@ -116,9 +118,9 @@ export const Navbar = () => {
             </NavbarItem>
           </>
         )}
-        {user && (
+        {user?.role === "user" && (
           <>
-            <Dropdown placement="bottom-end">
+            <Dropdown placement="bottom-end" backdrop="blur">
               <DropdownTrigger>
                 <Avatar
                   isBordered
@@ -135,16 +137,63 @@ export const Navbar = () => {
                   <p className="font-semibold">Signed in as</p>
                   <p className="font-semibold">{user?.email}</p>
                 </DropdownItem>
-                <DropdownItem key="settings" href="/profile">
+
+                <DropdownItem key="user-profile" href="/profile">
                   Profile
                 </DropdownItem>
-                <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                <DropdownItem key="analytics">Analytics</DropdownItem>
-                <DropdownItem key="system">System</DropdownItem>
-                <DropdownItem key="configurations">Configurations</DropdownItem>
-                <DropdownItem key="help_and_feedback">
-                  Help & Feedback
+                <DropdownItem key="user-recipe" href="#">
+                  My Recipe
                 </DropdownItem>
+                <DropdownItem key="user-followers" href="#">
+                  My Follower&apos;s
+                </DropdownItem>
+                <DropdownItem key="user-followings" href="#">
+                  Followings
+                </DropdownItem>
+                <DropdownItem key="user-membership" href="#">
+                  Get Membership
+                </DropdownItem>
+                <DropdownItem key="user-edit-profile" href="/edit-profile">
+                  Edit Profile
+                </DropdownItem>
+
+                <DropdownItem
+                  onClick={handleLogout}
+                  key="logout"
+                  color="danger"
+                >
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </>
+        )}
+        {user?.role === "admin" && (
+          <>
+            <Dropdown placement="bottom-end" backdrop="blur">
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="warning"
+                  name="Jason Hughes"
+                  size="sm"
+                  src={user.profilePhoto}
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">{user?.email}</p>
+                </DropdownItem>
+
+                {/* For Admin */}
+
+                <DropdownItem key="admin-profile" href="/admin">
+                  Profile
+                </DropdownItem>
+
                 <DropdownItem
                   onClick={handleLogout}
                   key="logout"
