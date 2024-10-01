@@ -1,8 +1,5 @@
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
-import circle from "../../assets/circle.svg";
-import grid from "../../assets/grid.svg";
 import { Image } from "@nextui-org/image";
-import { Button } from "@nextui-org/button";
 
 type TTeamData = {
   name: string;
@@ -54,7 +51,7 @@ const AboutTeamSection = () => {
   ];
 
   return (
-    <div className="dark:bg-slate-600 bg-slate-100 ">
+    <div className=" ">
       <div className="container mx-auto pt-32 pb-16">
         <div className="mb-16">
           <h3 className="text-4xl text-center">Team Section</h3>
