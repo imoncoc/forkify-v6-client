@@ -12,6 +12,7 @@ import loginValidationSchema from "@/src/schemas/login.schemas";
 import { useUserLogin } from "@/src/hooks/auth.hook";
 import Loading from "@/src/components/UI/Loading";
 import { useUser } from "@/src/context/user.provider";
+import FXInputPassword from "@/src/components/form/FXInputPassword";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -51,7 +52,21 @@ const LoginPage = () => {
               <FXInput label="Email" name="email" type="email" />
             </div>
             <div className="py-3">
-              <FXInput label="Password" name="password" type="password" />
+              <FXInputPassword
+                label="Password"
+                name="password"
+                type="password"
+              />
+            </div>
+
+            <div className="flex gap-2 justify-end">
+              <p className="text-end">Forget your password?</p>
+              <Link
+                className="text-customColorPrimary hover:text-customColor1"
+                href={"/forget-password"}
+              >
+                Click here
+              </Link>
             </div>
 
             <Button

@@ -37,6 +37,26 @@ export const loginUser = async (userData: FieldValues) => {
     throw new Error(error);
   }
 };
+export const forgetPassword = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post(
+      "/auth/forget-password",
+      userData
+    );
+
+    // if (data?.success) {
+    //   cookies().set("accessToken", data?.data?.accessToken);
+    //   cookies().set("refreshToken", data?.data?.refreshToken);
+    // }
+    if (data?.success) {
+      return data;
+    } else {
+      throw new Error("Something went wrong");
+    }
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
 
 export const getCurrentUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
