@@ -12,7 +12,7 @@ const page = () => {
     { name: "Phone: ", description: "+8801521-325206", thumbnail: phone },
     {
       name: "Address: ",
-      description: "123 Main Street City, Country 12345",
+      description: "Narayangonj, Dhaka",
       thumbnail: address,
     },
   ];

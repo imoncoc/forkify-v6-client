@@ -14,16 +14,16 @@ const ContactCard = ({ contact }: { contact: TContact }) => {
   const { name, description, thumbnail } = contact;
 
   return (
-    <Card isFooterBlurred radius="lg" className="border-none w-[250px]">
+    <Card isFooterBlurred radius="lg" className="border-none w-[260px]">
       <Image
         alt="Woman listing to music"
-        className="object-cover px-4"
-        height={250}
+        className="object-cover p-4"
+        height={260}
         src={thumbnail}
-        width={250}
+        width={260}
       />
       <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-        <p className="text-tiny text-white/80">{name}</p>
+        <p className="text-tiny text-black/80 dark:text-white/80">{name}</p>
         <Button
           className="text-tiny text-white bg-black/20"
           variant="flat"

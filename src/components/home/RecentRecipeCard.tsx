@@ -29,7 +29,7 @@ const RecentRecipeCard = ({ recipe }) => {
             <Image
               alt="Breathing app icon"
               className="rounded-full w-10 h-11 bg-black"
-              src="https://nextui.org/images/breathing-app-icon.jpeg"
+              src={thumbnail}
             />
             <div className="flex flex-col">
               <p className="text-tiny text-white/60">Breathing App</p>
@@ -38,8 +38,8 @@ const RecentRecipeCard = ({ recipe }) => {
               </p>
             </div>
           </div>
-          <Button radius="full" size="sm">
-            Get App
+          <Button radius="full" size="sm" color="warning" variant="shadow">
+            View Details
           </Button>
         </CardFooter>
       </Card>

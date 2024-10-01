@@ -48,7 +48,10 @@ const HeroPage = () => {
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.3 }}
               >
-                <Button className="bg-gradient-to-r from-customColor2 to-customColor1 text-slate-700 font-medium px-8 py-4 rounded-lg text-lg">
+                {/* <Button className="bg-gradient-to-r from-customColor2 to-customColor1 text-slate-700 font-medium px-8 py-4 rounded-lg text-lg">
+                  Start Cooking
+                </Button> */}
+                <Button color="warning" size="lg" variant="shadow">
                   Start Cooking
                 </Button>
               </motion.div>

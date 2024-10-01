@@ -106,7 +106,7 @@ export const Navbar = () => {
             <NavbarItem className="hidden sm:flex gap-2">
               <Link href="/login">
                 <Button
-                  color="warning"
+                  color="danger"
                   variant="shadow"
                   // className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold"
                 >

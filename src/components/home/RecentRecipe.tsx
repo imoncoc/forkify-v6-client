@@ -14,7 +14,7 @@ const RecentRecipe = async () => {
 
   return (
     <div className="container mx-auto">
-      <div className="grid grid-cols-2  md:grid-cols-3 gap-6 mx-4 md:mx-0">
+      <div className=" py-32 grid grid-cols-2  md:grid-cols-3 gap-6 mx-4 md:mx-0">
         {data?.data?.result?.map((recipe, index) => (
           <RecentRecipeCard key={recipe._id} recipe={recipe} />
         ))}
