@@ -63,11 +63,7 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar
-      className="bg-gradient-to-r from-customColor1 to-customColor2 dark:bg-gradient-to-r dark:from-default-100 dark:to-default-200"
-      maxWidth="xl"
-      position="sticky"
-    >
+    <NextUINavbar className="py-4" maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -109,7 +105,11 @@ export const Navbar = () => {
           <>
             <NavbarItem className="hidden sm:flex gap-2">
               <Link href="/login">
-                <Button className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold">
+                <Button
+                  color="warning"
+                  variant="shadow"
+                  // className="bg-slate-50 dark:bg-slate-200 text-customColorPrimary font-semibold"
+                >
                   Login
                 </Button>
               </Link>

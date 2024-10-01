@@ -1,9 +1,7 @@
 import { Button } from "@nextui-org/button";
 import React from "react";
 
-import AboutTeamSection from "@/src/components/aboutUs/AboutTeamSection";
-
-const AboutPage = () => {
+const page = () => {
   return (
     <>
       <div
@@ -30,10 +28,8 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-
-      <AboutTeamSection />
     </>
   );
 };
 
-export default AboutPage;
+export default page;
