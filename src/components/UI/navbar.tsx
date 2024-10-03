@@ -144,6 +144,9 @@ export const Navbar = () => {
                 <DropdownItem key="user-recipe" href="/my-recipe">
                   My Recipe
                 </DropdownItem>
+                <DropdownItem key="user-recipe" href="/add-recipe">
+                  Add new recipe
+                </DropdownItem>
                 <DropdownItem key="user-followers" href="#">
                   My Follower&apos;s
                 </DropdownItem>

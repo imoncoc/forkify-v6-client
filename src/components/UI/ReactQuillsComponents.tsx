@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Button } from "@nextui-org/button";
@@ -38,6 +37,7 @@ function imageHandler() {
   if (url) {
     const quill = this.quill; // Get the quill instance
     const range = quill.getSelection(); // Get the cursor position
+
     quill.insertEmbed(range.index, "image", url); // Insert image at cursor position
   }
 }
@@ -48,6 +48,7 @@ function ReactQuillsComponents() {
   const [ingredients, setIngredients] = useState<
     { name: string; marked: boolean }[]
   >([]);
+  const [useClient, setUseClient] = useState(false); // Checkbox state for "use client"
 
   // Function to add a new ingredient
   const addIngredient = () => {
@@ -83,22 +84,18 @@ function ReactQuillsComponents() {
     return { images: imageUrls, description };
   };
 
-  // Toggle marking/unmarking the image
-  const handleImageCheck = (url: string) => {
-    setMarkedImages((prev) => ({
-      ...prev,
-      [url]: !prev[url], // Toggle the current marked status
-    }));
-  };
-
   const handleSubmit = () => {
     const { images, description } = separateImagesAndText();
-    console.log("Images:", images);
-    console.log("Description:", description);
+    if (useClient) {
+      console.log("Images:", images);
+      console.log("Description:", description);
+    }
   };
 
   const onSubmit = (userData: any) => {
-    console.log("data: ", userData);
+    if (useClient) {
+      console.log("data: ", userData);
+    }
     handleSubmit();
   };
 
@@ -151,7 +148,6 @@ function ReactQuillsComponents() {
                   label=""
                   name={`ingredient-${index}`}
                   type="text"
-                  //   value={ingredient.name}
                   onChange={(e) =>
                     handleIngredientChange(index, e.target.value)
                   }
@@ -170,6 +166,13 @@ function ReactQuillsComponents() {
             </Button>
           </div>
 
+          <Checkbox
+            isSelected={useClient}
+            onChange={() => setUseClient(!useClient)}
+          >
+            Use client
+          </Checkbox>
+
           <Button
             className="my-3 w-full rounded-md bg-default-900 font-semibold text-default"
             size="lg"
@@ -180,14 +183,6 @@ function ReactQuillsComponents() {
         </FXForm>
       </div>
       {/* Custom input end */}
-      {/* <div className="mt-4">
-        <button
-          onClick={handleSubmit}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Log Quill Value
-        </button>
-      </div> */}
     </div>
   );
 }

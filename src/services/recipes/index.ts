@@ -1,4 +1,18 @@
+"use server";
+import { FieldValues } from "react-hook-form";
+
 import envConfig from "@/src/config/envConfig";
+import axiosInstance from "@/src/lib/AxiosInstance";
+
+export const addNewRecipe = async (recipe: FieldValues): Promise<any> => {
+  try {
+    const res = await axiosInstance.post("/recipe", recipe);
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
 
 export const getAllRecipes = async () => {
   let fetchOptions = {};

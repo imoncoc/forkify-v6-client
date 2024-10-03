@@ -6,13 +6,32 @@ import StarterKit from "@tiptap/starter-kit";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
 import Image from "@tiptap/extension-image";
+import { Button } from "@nextui-org/button";
+import { toast } from "sonner";
+import { useAddNewRecipe } from "@/src/hooks/recipe.hook";
+
+interface TUserData {
+  image?: string;
+  thumbnail?: string;
+  description: string;
+  title: string;
+  timeFun?: number;
+  ingredients: string[];
+  selectedTags?: string[];
+  tags?: string[];
+}
 
 const TipTapEditor = () => {
+  const { mutate: handleAddNewRecipe, isPending } = useAddNewRecipe();
+
   const [title, setTitle] = useState(""); // Title of the recipe
-  const [timeFun, setTimeFun] = useState<number | null>(null); // Time input (e.g., cooking time)
+  const [timeFun, setTimeFun] = useState<number>(0); // Time input (e.g., cooking time)
   const [checkedTags, setCheckedTags] = useState<Record<string, boolean>>({
     vegetarian: false,
     "gluten-free": false,
+    Vegan: false,
+    Organic: false,
+    "Sugar-free": false,
   });
   const [checkedOptions, setCheckedOptions] = useState<Record<string, boolean>>(
     {}
@@ -20,6 +39,7 @@ const TipTapEditor = () => {
   const [editorContent, setEditorContent] = useState("");
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState<string[]>([]);
+  let userData: TUserData;
 
   const editor = useEditor({
     extensions: [StarterKit, Bold, Italic, Image],
@@ -34,39 +54,75 @@ const TipTapEditor = () => {
       .match(/<img[^>]+src="([^">]+)"/g)
       ?.map((imgTag) => {
         const match = imgTag.match(/src="([^">]+)"/);
+
         return match ? match[1] : null;
       })
       .filter(Boolean);
 
+    let image;
+
     if (imageUrls) {
-      imageUrls.forEach((url) => console.log("Image URL:", url));
+      imageUrls.forEach((url) => {
+        image = url;
+        // console.log("Image URL:", url);
+      });
     } else {
       console.log("No images found.");
     }
 
-    if (description) {
-      console.log("Description:", description);
-    }
+    // if (description) {
+    //   console.log("Description:", description);
+    // }
 
     const checkedIngredients = ingredients.filter(
       (ingredient) => checkedOptions[ingredient]
     );
-    if (checkedIngredients.length > 0) {
-      console.log("Checked Ingredients:", checkedIngredients.join(", "));
-    } else {
-      console.log("No ingredients checked.");
-    }
+
+    // if (checkedIngredients.length > 0) {
+    //   console.log("Checked Ingredients:", checkedIngredients.join(", "));
+    // } else {
+    //   console.log("No ingredients checked.");
+    // }
 
     // Log title, timeFun, and checked tags
-    console.log("Title:", title);
-    console.log("Cooking Time:", timeFun ? `${timeFun} minutes` : "Not set");
+    // console.log("Title:", title);
+    // console.log("Cooking Time:", timeFun ? `${timeFun} minutes` : "Not set");
     const selectedTags = Object.keys(checkedTags).filter(
       (tag) => checkedTags[tag]
     );
-    console.log(
-      "Selected Tags:",
-      selectedTags.length > 0 ? selectedTags.join(", ") : "No tags selected"
-    );
+
+    // console.log(
+    //   "Selected Tags:",
+    //   selectedTags.length > 0 ? selectedTags.join(", ") : "No tags selected"
+    // );
+
+    userData = {
+      thumbnail: image,
+      description,
+      title,
+      timeFun,
+      ingredients,
+      tags: selectedTags,
+    };
+
+    // Check if any field is missing in userData
+    const missingFields = [];
+
+    if (!userData.thumbnail) missingFields.push("Image");
+    if (!userData.description) missingFields.push("Description");
+    if (!userData.title) missingFields.push("Title");
+    if (!userData.timeFun) missingFields.push("Time");
+    if (!userData.tags) missingFields.push("tags");
+    if (userData.ingredients.length === 0) missingFields.push("Ingredients");
+
+    if (missingFields.length > 0) {
+      // Show toast notification for missing fields
+      toast.error(`Missing data: ${missingFields.join(", ")}`);
+      return; // Don't proceed further if data is missing
+    }
+
+    console.log("userData: ", userData);
+    handleAddNewRecipe(userData);
   };
 
   const setBold = useCallback(() => {
@@ -85,12 +141,13 @@ const TipTapEditor = () => {
     const url = window.prompt("Enter image URL");
 
     if (url) {
-      editor.chain().focus().setImage({ src: url, width: 300 }).run();
+      editor?.chain().focus().setImage({ src: url }).run();
     }
   }, [editor]);
 
   const addIngredient = () => {
     const ingredient = window.prompt("Enter an ingredient");
+
     if (ingredient) {
       setIngredients((prevIngredients) => [...prevIngredients, ingredient]);
       setCheckedOptions((prev) => ({
@@ -176,17 +233,19 @@ const TipTapEditor = () => {
       <div className="mt-4">
         <h3 className="text-xl font-semibold">Tags:</h3>
         <div className="flex space-x-4">
-          {["vegetarian", "gluten-free"].map((tag) => (
-            <label key={tag} className="flex items-center">
-              <input
-                type="checkbox"
-                checked={checkedTags[tag]}
-                onChange={() => handleTagChange(tag)}
-                className="mr-2"
-              />
-              {tag}
-            </label>
-          ))}
+          {["vegetarian", "gluten-free", "Vegan", "Organic", "Sugar-free"].map(
+            (tag) => (
+              <label key={tag} className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={checkedTags[tag]}
+                  onChange={() => handleTagChange(tag)}
+                  className="mr-2"
+                />
+                {tag}
+              </label>
+            )
+          )}
         </div>
       </div>
 
@@ -216,16 +275,6 @@ const TipTapEditor = () => {
         </button>
       </div>
 
-      {/* Submit button */}
-      <div className="mt-6">
-        <button
-          onClick={handleButtonClick}
-          className="px-4 py-2 bg-green-500 text-white rounded"
-        >
-          Submit & Show Data in Console
-        </button>
-      </div>
-
       {/* Display selected data */}
       <div className="mt-6">
         <h3 className="text-xl font-semibold">Ingredients:</h3>
@@ -247,6 +296,19 @@ const TipTapEditor = () => {
         ) : (
           <p>No ingredients added yet.</p>
         )}
+      </div>
+      {/* Submit button */}
+      <div className="mt-6">
+        {/* <button
+          onClick={handleButtonClick}
+          className="px-4 py-2 bg-green-500 text-white rounded"
+        >
+          Submit & Show Data in Console
+        </button> */}
+
+        <Button color="warning" variant="shadow" onClick={handleButtonClick}>
+          Submit Recipe
+        </Button>
       </div>
     </div>
   );

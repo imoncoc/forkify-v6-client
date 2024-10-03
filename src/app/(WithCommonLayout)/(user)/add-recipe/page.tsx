@@ -2,6 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
+
 import UserInfo from "@/src/components/profile/UserInfo";
 import ReactQuillsComponents from "@/src/components/UI/ReactQuillsComponents";
 
@@ -24,8 +25,8 @@ const Page = () => {
               <p className="text-3xl text-center">Edit Your Recipe Easily</p>
               <div>
                 {/* TipTap editor */}
-                {/* <TipTapEditor /> */}
-                <ReactQuillsComponents />
+                <TipTapEditor />
+                {/* <ReactQuillsComponents /> */}
               </div>
             </div>
           </div>
