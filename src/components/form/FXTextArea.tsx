@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Textarea } from "@nextui-org/input";
 import { useFormContext, useWatch } from "react-hook-form";
 
@@ -24,8 +25,8 @@ export default function FXTextarea({
       {...register(name)}
       label={label}
       minRows={6}
-      variant={variant}
       value={currentValue || ""}
+      variant={variant}
     />
   );
 }

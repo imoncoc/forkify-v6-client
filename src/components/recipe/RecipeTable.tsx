@@ -54,9 +54,10 @@ const columns = [
 ];
 
 const RecipeTable = () => {
-  const { data: userRecipeData, isError, isLoading } = useUserGetRecipes();
+  const { data: userRecipeData } = useUserGetRecipes();
 
   console.log(" userRecipeData: ", userRecipeData);
+
   return (
     <div>
       <Table aria-label="Example table with dynamic content">

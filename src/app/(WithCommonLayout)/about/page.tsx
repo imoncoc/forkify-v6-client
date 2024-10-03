@@ -24,7 +24,7 @@ const AboutPage = () => {
             <p className="text-lg sm:text-xl lg:text-2xl text-white mt-4">
               Discover delicious recipes and culinary inspiration.
             </p>
-            <Button size="lg" color="warning" variant="shadow" className="mt-6">
+            <Button className="mt-6" color="warning" size="lg" variant="shadow">
               Explore Recipes
             </Button>
           </div>

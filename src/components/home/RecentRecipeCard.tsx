@@ -1,10 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { Card, Body, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 
-const RecentRecipeCard = ({ recipe }) => {
+const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
   const { thumbnail, title, tags } = recipe;
   // console.log("recipe: ", recipe);
 
@@ -34,11 +33,11 @@ const RecentRecipeCard = ({ recipe }) => {
             <div className="flex flex-col">
               <p className="text-tiny text-white/60">Breathing App</p>
               <p className="text-tiny text-white/60">
-                Get a good night's sleep.
+                Get a good night&apos;s sleep.
               </p>
             </div>
           </div>
-          <Button radius="full" size="sm" color="warning" variant="shadow">
+          <Button color="warning" radius="full" size="sm" variant="shadow">
             View Details
           </Button>
         </CardFooter>

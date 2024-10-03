@@ -1,33 +1,28 @@
 "use client";
 
 import { Button } from "@nextui-org/button";
-import React, { useEffect } from "react";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
-import loginValidationSchema from "@/src/schemas/login.schemas";
+// import loginValidationSchema from "@/src/schemas/login.schemas";
 import Loading from "@/src/components/UI/Loading";
-import { useUser } from "@/src/context/user.provider";
+// import { useUser } from "@/src/context/user.provider";
 import { useUserForgetPassword } from "@/src/hooks/auth.hook";
 import forgetPasswordValidationSchema from "@/src/schemas/forgetPassword.schema";
 
 const ForgetPassword = () => {
-  const {
-    mutate: handleForgetPassword,
-    isPending,
-    isSuccess,
-  } = useUserForgetPassword();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const { setIsLoading: userLoading } = useUser();
+  const { mutate: handleForgetPassword, isPending } = useUserForgetPassword();
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const { setIsLoading: userLoading } = useUser();
 
-  const redirect = searchParams.get("redirect");
+  // const redirect = searchParams.get("redirect");
 
   const onSubmit: SubmitHandler<FieldValues> = (userData) => {
-    console.log("userData: ", userData);
     handleForgetPassword(userData);
   };
 

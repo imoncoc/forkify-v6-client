@@ -24,11 +24,11 @@ const Footer = () => {
             <Link href={"/"}>
               <div className="flex justify-center items-center gap-2">
                 <Image
-                  className="size-12"
-                  width={300}
-                  height={300}
                   alt="NextUI hero Image"
+                  className="size-12"
+                  height={300}
                   src={logo}
+                  width={300}
                 />
                 <p className="text-xl font-bold uppercase text-customColor2">
                   {" "}
@@ -38,24 +38,24 @@ const Footer = () => {
             </Link>
 
             <Link
-              href={"/about-us"}
               className="uppercase hover:text-strongCyan"
+              href={"/about-us"}
             >
               About Us
             </Link>
             <Link
-              href={"/contact-us"}
               className="uppercase hover:text-strongCyan"
+              href={"/contact-us"}
             >
               Contact Us
             </Link>
             <Link
-              href={"/facility-listing"}
               className="uppercase hover:text-strongCyan"
+              href={"/facility-listing"}
             >
               Facility Listing
             </Link>
-            <Link href={"/booking"} className="uppercase hover:text-strongCyan">
+            <Link className="uppercase hover:text-strongCyan" href={"/booking"}>
               Booking
             </Link>
           </div>
@@ -72,8 +72,8 @@ const Footer = () => {
             <div className="flex space-x-10">
               <div className="border p-1 text-orange-200 hover:text-white rounded-md">
                 <FacebookIcon
-                  size={24}
                   className="text-orange-200 hover:text-white cursor-pointer transition duration-500"
+                  size={24}
                 />
               </div>
               <div className="border p-1 text-orange-200 hover:text-white rounded-md">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React from "react";
 import { Button } from "@nextui-org/button";
@@ -12,13 +13,7 @@ import { useUserUpdate } from "@/src/hooks/auth.hook";
 import Loading from "@/src/components/UI/Loading";
 
 const EditProfilePage = () => {
-  const {
-    mutate: handleUpdateUser,
-    isPending,
-    isError,
-    isSuccess,
-    data,
-  } = useUserUpdate();
+  const { mutate: handleUpdateUser, isPending } = useUserUpdate();
   const { user, setIsLoading: userLoading } = useUser();
 
   const onSubmit = async (data: any) => {
@@ -27,6 +22,7 @@ const EditProfilePage = () => {
     if (password) {
       if (password.length < 8) {
         toast.error("Error: Password must be at least 8 characters long.");
+
         return;
       } else {
         userData.password = password;
@@ -53,6 +49,7 @@ const EditProfilePage = () => {
         <div className="py-16">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="w-full px-8 md:w-1/5 md:px-0">
+              {/* @ts-expect-error Server Component */}
               <UserInfo />
             </div>
             <div className="w-full px-8 md:w-4/5 md:px-0 ">

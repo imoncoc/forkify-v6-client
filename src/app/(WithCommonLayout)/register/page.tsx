@@ -14,13 +14,7 @@ import Loading from "@/src/components/UI/Loading";
 import { useUserRegistration } from "@/src/hooks/auth.hook";
 
 const register = () => {
-  const {
-    mutate: handleUserRegistration,
-    isPending,
-    isError,
-  } = useUserRegistration();
-
-  console.log("isError: ", isError);
+  const { mutate: handleUserRegistration, isPending } = useUserRegistration();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const userData = {

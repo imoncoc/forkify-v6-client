@@ -19,6 +19,7 @@ const FXSelect = ({
 }: IProps) => {
   const {
     register,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: { errors },
   } = useFormContext();
 

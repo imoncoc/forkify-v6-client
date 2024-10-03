@@ -2,7 +2,14 @@ import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 
-const NextUICard = ({ imageUrl, name, role, description }) => {
+interface ITPros {
+  imageUrl: string;
+  name: string;
+  role: string;
+  description: string;
+}
+
+const NextUICard = ({ imageUrl, name, role, description }: ITPros) => {
   return (
     <Card
       isHoverable
@@ -18,9 +25,9 @@ const NextUICard = ({ imageUrl, name, role, description }) => {
       {/* Card Image */}
       <div className="relative h-[240px] w-full overflow-hidden">
         <Image
-          src={imageUrl}
           alt={`${name}'s image`}
           className="object-cover w-full h-full"
+          src={imageUrl}
         />
       </div>
 
@@ -31,7 +38,7 @@ const NextUICard = ({ imageUrl, name, role, description }) => {
 
       {/* Card Footer */}
       <CardFooter className="p-4 flex justify-center">
-        <Button color="primary" className="shadow-md hover:shadow-lg">
+        <Button className="shadow-md hover:shadow-lg" color="primary">
           Contact
         </Button>
       </CardFooter>

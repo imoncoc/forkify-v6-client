@@ -6,7 +6,7 @@ import React from "react";
 import { useUser } from "@/src/context/user.provider";
 
 const UserInfo = async () => {
-  const { user, isLoading, setIsLoading: userLoading } = useUser();
+  const { user } = useUser();
 
   return (
     <div>

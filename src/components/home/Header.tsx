@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Header = () => {
   const [open, setOpen] = useState(true);
@@ -24,6 +24,7 @@ const Header = () => {
       </li>
     </>
   );
+
   return <div>Header</div>;
 };
 

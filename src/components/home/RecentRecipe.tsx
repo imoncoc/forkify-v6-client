@@ -1,25 +1,25 @@
-import React from "react";
+/* eslint-disable prettier/prettier */
 
-import nexiosInstance from "@/src/config/nexios.config";
 import RecentRecipeCard from "./RecentRecipeCard";
+import { getRecentPost } from "@/src/services/recipes";
 
 const RecentRecipe = async () => {
-  const { data }: any = await nexiosInstance.get(
-    "/recipe?limit=6&isDeleted=false",
-    {
-      cache: "no-store",
-      next: {},
-    }
-  );
+  const { data } = await getRecentPost();
 
   return (
-    <div className="container mx-auto">
-      <div className=" py-32 grid grid-cols-2  md:grid-cols-3 gap-6 mx-4 md:mx-0">
-        {data?.data?.result?.map((recipe, index) => (
-          <RecentRecipeCard key={recipe._id} recipe={recipe} />
-        ))}
+    <>
+      <div>
+        {data && (
+          <div className="container mx-auto">
+            <div className=" py-32 grid grid-cols-2  md:grid-cols-3 gap-6 mx-4 md:mx-0">
+              {data?.result?.map((recipe: any) => (
+                <RecentRecipeCard key={recipe._id} recipe={recipe} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -27,7 +27,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
-import { SearchIcon, Logo } from "@/src/components/icons";
+import { SearchIcon } from "@/src/components/icons";
 import logo from "../../assets/logo.png";
 import { logout } from "@/src/services/AuthService";
 import { useUser } from "@/src/context/user.provider";
@@ -120,7 +120,7 @@ export const Navbar = () => {
         )}
         {user?.role === "user" && (
           <>
-            <Dropdown placement="bottom-end" backdrop="blur">
+            <Dropdown backdrop="blur" placement="bottom-end">
               <DropdownTrigger>
                 <Avatar
                   isBordered
@@ -161,9 +161,9 @@ export const Navbar = () => {
                 </DropdownItem>
 
                 <DropdownItem
-                  onClick={handleLogout}
                   key="logout"
                   color="danger"
+                  onClick={handleLogout}
                 >
                   Log Out
                 </DropdownItem>
@@ -173,7 +173,7 @@ export const Navbar = () => {
         )}
         {user?.role === "admin" && (
           <>
-            <Dropdown placement="bottom-end" backdrop="blur">
+            <Dropdown backdrop="blur" placement="bottom-end">
               <DropdownTrigger>
                 <Avatar
                   isBordered
@@ -198,9 +198,9 @@ export const Navbar = () => {
                 </DropdownItem>
 
                 <DropdownItem
-                  onClick={handleLogout}
                   key="logout"
                   color="danger"
+                  onClick={handleLogout}
                 >
                   Log Out
                 </DropdownItem>

@@ -47,8 +47,8 @@ const page = () => {
 
       <div className="container mx-auto">
         <div className="flex justify-center items-center gap-8  py-32">
-          {contactData.map((contact) => (
-            <ContactCard contact={contact} key={contact.name} />
+          {contactData.map((contact: any) => (
+            <ContactCard key={contact.name} contact={contact} />
           ))}
         </div>
       </div>

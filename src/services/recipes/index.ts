@@ -48,3 +48,22 @@ export const getUserRecipe = async () => {
     throw new Error(error);
   }
 };
+
+export const getRecentPost = async () => {
+  let fetchOptions = {};
+
+  fetchOptions = {
+    cache: "no-store",
+  };
+
+  const res = await fetch(
+    `${envConfig.baseApi}/recipe?limit=6&isDeleted=false`,
+    fetchOptions
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};

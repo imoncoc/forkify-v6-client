@@ -79,7 +79,7 @@ const LoginPage = () => {
           </FXForm>
           <div className="text-center">
             Don&lsquo;t have account ?{" "}
-            <Link href={"/register"} className="hover:text-customColorPrimary">
+            <Link className="hover:text-customColorPrimary" href={"/register"}>
               Register
             </Link>
           </div>

@@ -29,19 +29,12 @@ export default function FXInputPassword({
   return (
     <Input
       {...register(name)}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
-      isInvalid={!!errors[name]}
-      label={label}
-      required={required}
-      size={size}
-      type={isVisible ? "text" : "password"}
-      variant={variant}
       endContent={
         <button
+          aria-label="toggle password visibility"
           className="focus:outline-none"
           type="button"
           onClick={toggleVisibility}
-          aria-label="toggle password visibility"
         >
           {isVisible ? (
             <EyeOff className="text-2xl text-default-400 pointer-events-none" />
@@ -51,6 +44,13 @@ export default function FXInputPassword({
           {/* type={isVisible ? "text" : "password"} */}
         </button>
       }
+      errorMessage={(errors[name]?.message as string) || ""}
+      isInvalid={!!errors[name]}
+      label={label}
+      required={required}
+      size={size}
+      type={isVisible ? "text" : "password"}
+      variant={variant}
     />
   );
 }

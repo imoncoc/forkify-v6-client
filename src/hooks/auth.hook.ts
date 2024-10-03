@@ -41,7 +41,6 @@ export const useUserUpdate = () => {
       toast.success("User update Successful");
     },
     onError(error: any) {
-      console.log("error hook", error);
       toast.error(error?.message);
     },
   });
