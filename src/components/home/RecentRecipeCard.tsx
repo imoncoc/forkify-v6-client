@@ -6,7 +6,7 @@ import { Button } from "@nextui-org/button";
 
 const RecentRecipeCard = ({ recipe }) => {
   const { thumbnail, title, tags } = recipe;
-  console.log("recipe: ", recipe);
+  // console.log("recipe: ", recipe);
 
   return (
     <div>

@@ -22,6 +22,7 @@ export interface IUser {
   email: string;
   status: string;
   phone: string;
+  address?: string;
   profilePhoto: string;
   createdAt?: string;
   updatedAt?: string;

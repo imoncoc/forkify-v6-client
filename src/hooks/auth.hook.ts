@@ -6,6 +6,7 @@ import {
   forgetPassword,
   loginUser,
   registerUser,
+  UpdateUser,
 } from "../services/AuthService";
 
 export const useUserRegistration = () => {
@@ -32,6 +33,20 @@ export const useUserLogin = () => {
     },
   });
 };
+export const useUserUpdate = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["USER_UPDATE"],
+    mutationFn: async (userData) => await UpdateUser(userData),
+    onSuccess: () => {
+      toast.success("User update Successful");
+    },
+    onError(error: any) {
+      console.log("error hook", error);
+      toast.error(error?.message);
+    },
+  });
+};
+
 export const useUserForgetPassword = () => {
   return useMutation<any, Error, FieldValues>({
     mutationKey: ["USER_FORGET_PASSWORD"],

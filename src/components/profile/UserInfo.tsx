@@ -1,14 +1,12 @@
 "use client";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useUser } from "@/src/context/user.provider";
 
 const UserInfo = async () => {
-  const { user, setIsLoading: userLoading } = useUser();
-
-  console.log("UserInfo: ", user);
+  const { user, isLoading, setIsLoading: userLoading } = useUser();
 
   return (
     <div>
@@ -26,6 +24,7 @@ const UserInfo = async () => {
             <h4 className="font-bold text-large">{user.name}</h4>
             <p className="text-tiny  font-bold">{user.email}</p>
             <small className="text-default-500">{user.phone}</small>
+            <small className="text-default-500">{user.address}</small>
             <p className="text-tiny pt-2">MemberShip</p>
           </CardHeader>
         </Card>
