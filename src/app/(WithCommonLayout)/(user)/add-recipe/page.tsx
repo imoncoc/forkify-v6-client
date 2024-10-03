@@ -4,7 +4,6 @@ import React from "react";
 import dynamic from "next/dynamic";
 
 import UserInfo from "@/src/components/profile/UserInfo";
-import ReactQuillsComponents from "@/src/components/UI/ReactQuillsComponents";
 
 // Dynamically import the TipTap editor to avoid SSR issues
 const TipTapEditor = dynamic(

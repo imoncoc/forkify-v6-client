@@ -1,5 +1,7 @@
 "use server";
 import { FieldValues } from "react-hook-form";
+import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
 
 import envConfig from "@/src/config/envConfig";
 import axiosInstance from "@/src/lib/AxiosInstance";
@@ -28,4 +30,21 @@ export const getAllRecipes = async () => {
   }
 
   return res.json();
+};
+
+export const getUserRecipe = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
+  let decodedToken = null;
+
+  if (accessToken) {
+    decodedToken = await jwtDecode(accessToken);
+  }
+
+  try {
+    const res = await axiosInstance.get(`/user-recipe/${decodedToken?.userId}`);
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };

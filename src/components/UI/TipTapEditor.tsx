@@ -8,7 +8,9 @@ import Italic from "@tiptap/extension-italic";
 import Image from "@tiptap/extension-image";
 import { Button } from "@nextui-org/button";
 import { toast } from "sonner";
+
 import { useAddNewRecipe } from "@/src/hooks/recipe.hook";
+import { useUser } from "@/src/context/user.provider";
 
 interface TUserData {
   image?: string;
@@ -19,10 +21,12 @@ interface TUserData {
   ingredients: string[];
   selectedTags?: string[];
   tags?: string[];
+  user?: string;
 }
 
 const TipTapEditor = () => {
   const { mutate: handleAddNewRecipe, isPending } = useAddNewRecipe();
+  const { user: userInfo, isLoading, setIsLoading: userLoading } = useUser();
 
   const [title, setTitle] = useState(""); // Title of the recipe
   const [timeFun, setTimeFun] = useState<number>(0); // Time input (e.g., cooking time)
@@ -103,6 +107,7 @@ const TipTapEditor = () => {
       timeFun,
       ingredients,
       tags: selectedTags,
+      user: userInfo?.userId,
     };
 
     // Check if any field is missing in userData

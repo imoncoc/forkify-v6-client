@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useUser } from "@/src/context/user.provider";
 
