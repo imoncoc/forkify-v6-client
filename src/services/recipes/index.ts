@@ -69,3 +69,19 @@ export const getRecentPost = async () => {
 
   return res.json();
 };
+
+export const getSingleRecipe = async (id: string) => {
+  let fetchOptions = {};
+
+  fetchOptions = {
+    cache: "no-store",
+  };
+
+  const res = await fetch(`${envConfig.baseApi}/recipe/${id}`, fetchOptions);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};

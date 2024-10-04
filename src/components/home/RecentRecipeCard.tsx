@@ -1,12 +1,27 @@
+"use client";
 import React from "react";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
+import { ArrowBigDown, ArrowBigUp, MessageSquareMore } from "lucide-react";
+import { TRecipe } from "@/src/types";
+import ReactStars from "react-stars";
+import { useRouter } from "next/navigation";
 
-const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
+const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
   const { thumbnail, title, tags } = recipe;
   // console.log("recipe: ", recipe);
+  const router = useRouter();
+
+  const ratingChanged = (newRating: number) => {
+    console.log(newRating);
+  };
+
+  const handleViewDetails = (id: string) => {
+    console.log("id: ", id);
+    router.push(`/recipe/${id}`);
+  };
 
   return (
     <div>
@@ -15,11 +30,20 @@ const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
         className="w-full h-[300px] col-span-12 sm:col-span-7"
       >
         <CardHeader className="absolute z-10 top-1 flex-col items-start">
-          <p className="text-tiny text-white/60 uppercase font-bold">
-            <Chip color="default" variant="faded">
-              {tags}
-            </Chip>
-          </p>
+          <div className="text-tiny w-full flex justify-between  text-white/60 uppercase font-bold">
+            <div>
+              <Chip color="default" className="text-tiny" variant="faded">
+                {tags}
+              </Chip>
+            </div>
+            {recipe.isPremium && (
+              <div>
+                <Chip color="secondary" className="text-tiny" variant="shadow">
+                  {"Premium"}
+                </Chip>
+              </div>
+            )}
+          </div>
           <h4 className="text-white/90 font-medium text-xl">{title}</h4>
         </CardHeader>
         <Image
@@ -29,8 +53,8 @@ const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
           src={thumbnail}
         />
         <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
-          <div className="flex flex-grow gap-2 items-center">
-            <Image
+          <div className="flex justify-between flex-grow gap-4 items-center text-white">
+            {/* <Image
               alt="Breathing app icon"
               className="rounded-full w-10 h-11 bg-black"
               src={thumbnail}
@@ -40,9 +64,34 @@ const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
               <p className="text-tiny text-white/60">
                 Get a good night&apos;s sleep.
               </p>
+            </div> */}
+
+            <div className="flex gap-2">
+              <ArrowBigUp className="cursor-pointer text-emerald-500" />
+              <span>{recipe.upvote.length - recipe.downvote.length}</span>
+              <ArrowBigDown className="cursor-pointer" />
+            </div>
+            <div className="flex gap-2">
+              <MessageSquareMore />
+              <p>({recipe.comments.length})</p>
+            </div>
+            <div className="flex justify-center items-center gap-2 me-2">
+              <ReactStars
+                color2={"#ffd700"}
+                count={5}
+                size={24}
+                onChange={ratingChanged}
+              />
+              <p>({recipe.ratting})</p>
             </div>
           </div>
-          <Button color="warning" radius="full" size="sm" variant="shadow">
+          <Button
+            color="warning"
+            radius="full"
+            size="sm"
+            variant="shadow"
+            onClick={() => handleViewDetails(recipe._id)}
+          >
             View Details
           </Button>
         </CardFooter>
