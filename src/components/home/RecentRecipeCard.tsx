@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
+import { Chip } from "@nextui-org/chip";
 
 const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
   const { thumbnail, title, tags } = recipe;
@@ -14,7 +15,11 @@ const RecentRecipeCard = ({ recipe }: { recipe: any }) => {
         className="w-full h-[300px] col-span-12 sm:col-span-7"
       >
         <CardHeader className="absolute z-10 top-1 flex-col items-start">
-          <p className="text-tiny text-white/60 uppercase font-bold">{tags}</p>
+          <p className="text-tiny text-white/60 uppercase font-bold">
+            <Chip color="default" variant="faded">
+              {tags}
+            </Chip>
+          </p>
           <h4 className="text-white/90 font-medium text-xl">{title}</h4>
         </CardHeader>
         <Image

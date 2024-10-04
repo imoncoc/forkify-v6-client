@@ -43,26 +43,26 @@ export const Navbar = () => {
     router.push("/");
   };
 
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+  // const searchInput = (
+  //   <Input
+  //     aria-label="Search"
+  //     classNames={{
+  //       inputWrapper: "bg-default-100",
+  //       input: "text-sm",
+  //     }}
+  //     endContent={
+  //       <Kbd className="hidden lg:inline-block" keys={["command"]}>
+  //         K
+  //       </Kbd>
+  //     }
+  //     labelPlacement="outside"
+  //     placeholder="Search..."
+  //     startContent={
+  //       <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+  //     }
+  //     type="search"
+  //   />
+  // );
 
   return (
     <NextUINavbar className="py-4" maxWidth="xl" position="sticky">
@@ -102,7 +102,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
 
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
         {!user && (
           <>
             <NavbarItem className="hidden sm:flex gap-2">
@@ -141,10 +141,10 @@ export const Navbar = () => {
                 <DropdownItem key="user-profile" href="/profile">
                   Profile
                 </DropdownItem>
-                <DropdownItem key="user-my-recipe" href="/my-recipe">
+                <DropdownItem key="user-my-recipe" href="/profile/my-recipe">
                   My Recipe
                 </DropdownItem>
-                <DropdownItem key="user-add-recipe" href="/add-recipe">
+                <DropdownItem key="user-add-recipe" href="/profile/add-recipe">
                   Add new recipe
                 </DropdownItem>
                 <DropdownItem key="user-followers" href="#">
@@ -216,8 +216,8 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu className="bg-gradient-to-r from-customColor1/50 to-customColor2/50 dark:bg-gradient-to-r dark:from-default-50 dark:to-default-100">
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        {/* {searchInput} */}
+        <div className="mx-4 mt-8 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link

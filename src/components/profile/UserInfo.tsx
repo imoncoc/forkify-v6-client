@@ -11,13 +11,13 @@ const UserInfo = async () => {
   return (
     <div>
       {user && (
-        <Card className="py-4">
+        <Card className="py-4 flex justify-center items-center">
           <CardBody className="overflow-visible py-2">
             <Image
               alt="Card background"
-              className="object-cover rounded-xl"
+              className="object-cover rounded-xl w-full mx-auto"
               src={user?.profilePhoto}
-              width={270}
+              width={500}
             />
           </CardBody>
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

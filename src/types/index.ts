@@ -28,3 +28,24 @@ export interface IUser {
   updatedAt?: string;
   __v?: number;
 }
+
+export interface TRecipe {
+  _id: string;
+  title: string;
+  isDeleted: boolean;
+  isPremium: boolean;
+  ratting: number;
+  upvote: any[];
+  downvote: any[];
+  comments: any[];
+  ingredients: string[];
+  timeFun: number;
+  thumbnail: string;
+  tags: string[];
+  description: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  publish: string;
+}

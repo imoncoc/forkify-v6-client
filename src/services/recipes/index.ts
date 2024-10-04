@@ -41,7 +41,9 @@ export const getUserRecipe = async () => {
   }
 
   try {
-    const res = await axiosInstance.get(`/user-recipe/${decodedToken?.userId}`);
+    const res = await axiosInstance.get(
+      `/user-recipe/${decodedToken?.userId}?limit=${2}`
+    );
 
     return res.data;
   } catch (error: any) {
