@@ -5,6 +5,8 @@ import { jwtDecode } from "jwt-decode";
 
 import envConfig from "@/src/config/envConfig";
 import axiosInstance from "@/src/lib/AxiosInstance";
+import { revalidatePath } from "next/cache";
+import { toast } from "sonner";
 
 export const addNewRecipe = async (recipe: FieldValues): Promise<any> => {
   try {
@@ -54,8 +56,13 @@ export const getUserRecipe = async () => {
 export const getRecentPost = async () => {
   let fetchOptions = {};
 
+  // fetchOptions = {
+  //   cache: "no-store",
+  // };
   fetchOptions = {
-    cache: "no-store",
+    next: {
+      revalidate: 5,
+    },
   };
 
   const res = await fetch(
@@ -84,4 +91,33 @@ export const getSingleRecipe = async (id: string) => {
   }
 
   return res.json();
+};
+
+export const upVoteRecipe = async (
+  id: string,
+  userData: FieldValues
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(`/user-recipe/vote/${id}`, userData);
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const updateRatingsRecipe = async (
+  id: string,
+  userData: FieldValues
+): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(
+      `/user-recipe/ratings/${id}`,
+      userData
+    );
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };

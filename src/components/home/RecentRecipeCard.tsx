@@ -5,22 +5,79 @@ import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
 import { ArrowBigDown, ArrowBigUp, MessageSquareMore } from "lucide-react";
-import { TRecipe } from "@/src/types";
 import ReactStars from "react-stars";
 import { useRouter } from "next/navigation";
 
-const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
-  const { thumbnail, title, tags } = recipe;
+import { TRecipe } from "@/src/types";
+import { useUser } from "@/src/context/user.provider";
+import { checkUserVote } from "@/src/utils/voteFunction";
+import {
+  useUserRatingsRecipe,
+  useUserUpVoteRecipe,
+} from "@/src/hooks/recipe.hook";
+
+// import { getRecentPost, updateRatingsRecipe } from "@/src/services/recipes";
+
+const RecentRecipeCard = ({
+  recipe,
+  refetchRecentPosts,
+}: {
+  recipe: TRecipe;
+  refetchRecentPosts: () => Promise<void>;
+}) => {
+  const { thumbnail, title, tags, downvote, upvote, rating } = recipe;
+  const { user } = useUser();
+  const { mutate: handleVoteSystem } = useUserUpVoteRecipe();
+  const { mutate: handleRatings } = useUserRatingsRecipe();
+
+  console.log("RecentRecipeCard: ", recipe);
+
+  const { isUpVote, isDownVote } = checkUserVote(
+    user?.userId,
+    upvote,
+    downvote
+  );
+
+  // console.log({ isUpVote, isDownVote });
+
+  // console.log("user: ", user);
   // console.log("recipe: ", recipe);
   const router = useRouter();
+  // console.log("recipe: ", recipe);
 
   const ratingChanged = (newRating: number) => {
-    console.log(newRating);
+    const id = recipe._id;
+
+    const userData = {
+      userId: user?.userId as string,
+      ratingValue: newRating as number,
+    };
+
+    handleRatings({ id, userData });
   };
 
   const handleViewDetails = (id: string) => {
     console.log("id: ", id);
     router.push(`/recipe/${id}`);
+  };
+
+  const handleUpvote = async (id: string) => {
+    const userData = {
+      userId: user?.userId as string,
+      isUpvote: true as boolean,
+    };
+
+    await handleVoteSystem({ id, userData });
+    console.log("res: ", res);
+    refetchRecentPosts();
+  };
+  const handleDownVote = (id: string) => {
+    const userData = {
+      userId: user?.userId as string,
+      isDownVote: true as boolean,
+    };
+
+    handleVoteSystem({ id, userData });
   };
 
   return (
@@ -45,6 +102,7 @@ const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
             )}
           </div>
           <h4 className="text-white/90 font-medium text-xl">{title}</h4>
+          <p className="text-tiny">{user?.email}</p>
         </CardHeader>
         <Image
           removeWrapper
@@ -67,22 +125,32 @@ const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
             </div> */}
 
             <div className="flex gap-2">
-              <ArrowBigUp className="cursor-pointer text-emerald-500" />
-              <span>{recipe.upvote.length - recipe.downvote.length}</span>
-              <ArrowBigDown className="cursor-pointer" />
+              <ArrowBigUp
+                className={`cursor-pointer ${isUpVote && "text-emerald-500"}`}
+                onClick={() => handleUpvote(recipe._id)}
+              />
+              <span>{recipe.upvote.length}</span>
+              <ArrowBigDown
+                className={`cursor-pointer ${isDownVote && "text-red-500"}`}
+                onClick={() => handleDownVote(recipe._id)}
+              />
+              <span>{recipe.downvote.length}</span>
             </div>
-            <div className="flex gap-2">
-              <MessageSquareMore />
-              <p>({recipe.comments.length})</p>
-            </div>
-            <div className="flex justify-center items-center gap-2 me-2">
+
+            <div className="flex justify-center items-center gap-2">
               <ReactStars
                 color2={"#ffd700"}
                 count={5}
                 size={24}
+                value={recipe.rating || 0}
                 onChange={ratingChanged}
               />
-              <p>({recipe.ratting})</p>
+              <p>({recipe.rating || 0})</p>
+            </div>
+            <div className="flex gap-2 me-2">
+              <Button color="primary" radius="full" size="sm" variant="shadow">
+                Follow
+              </Button>
             </div>
           </div>
           <Button

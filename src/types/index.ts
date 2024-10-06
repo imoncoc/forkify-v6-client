@@ -35,6 +35,7 @@ export interface TRecipe {
   isDeleted: boolean;
   isPremium: boolean;
   ratting: number;
+  rating?: number;
   upvote: any[];
   downvote: any[];
   comments: any[];
@@ -48,4 +49,16 @@ export interface TRecipe {
   updatedAt: string;
   __v: number;
   publish: string;
+}
+
+export interface TComment {
+  _id: string;
+  userId: IUser;
+  recipeId: string;
+  comment: string;
+  isDeleted: boolean; // Corrected data type from 'false' to boolean
+  commentCanDelete: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
