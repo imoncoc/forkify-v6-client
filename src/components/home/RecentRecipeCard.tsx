@@ -7,6 +7,7 @@ import { Chip } from "@nextui-org/chip";
 import { ArrowBigDown, ArrowBigUp, MessageSquareMore } from "lucide-react";
 import ReactStars from "react-stars";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { TRecipe } from "@/src/types";
 import { useUser } from "@/src/context/user.provider";
@@ -16,17 +17,9 @@ import {
   useUserRatingsRecipe,
   useUserUpVoteRecipe,
 } from "@/src/hooks/recipe.hook";
-import { toast } from "sonner";
-
 // import { getRecentPost, updateRatingsRecipe } from "@/src/services/recipes";
 
-const RecentRecipeCard = ({
-  recipe,
-  refetchRecentPosts,
-}: {
-  recipe: TRecipe;
-  refetchRecentPosts: () => Promise<void>;
-}) => {
+const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
   const { thumbnail, title, tags, downvote, upvote, rating } = recipe;
   const { user } = useUser();
   const { mutate: handleVoteSystem } = useUserUpVoteRecipe();
@@ -62,9 +55,7 @@ const RecentRecipeCard = ({
       isUpvote: true as boolean,
     };
 
-    await handleVoteSystem({ id, userData });
-
-    refetchRecentPosts();
+    handleVoteSystem({ id, userData });
   };
   const handleDownVote = (id: string) => {
     const userData = {
@@ -113,7 +104,7 @@ const RecentRecipeCard = ({
             )}
           </div>
           <h4 className="text-white/90 font-medium text-xl">{title}</h4>
-          <p className="text-tiny"> {recipe?.user?.email || ""}</p>
+          <p className="text-tiny">{recipe?.user?.email || ""}</p>
         </CardHeader>
         <Image
           removeWrapper
@@ -161,7 +152,7 @@ const RecentRecipeCard = ({
             </div>
             <div className="flex gap-2 me-2">
               <Button
-                onClick={() => handleFollowOrUnFollow(recipe?.user?._id)}
+                onClick={() => handleFollowOrUnFollow(recipe?.user?._id!)}
                 color="default"
                 radius="full"
                 size="sm"
@@ -176,7 +167,7 @@ const RecentRecipeCard = ({
             radius="full"
             size="sm"
             variant="shadow"
-            onClick={() => handleViewDetails(recipe?.user?._id)}
+            onClick={() => handleViewDetails(recipe?.user?._id!)}
           >
             View Details
           </Button>

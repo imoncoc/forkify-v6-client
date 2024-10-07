@@ -1,10 +1,11 @@
 "use client";
-import { useUser } from "@/src/context/user.provider";
-import { useDeleteComment } from "@/src/hooks/comment.hook";
 
 import { Button } from "@nextui-org/button";
 import { CardFooter } from "@nextui-org/card";
 import React from "react";
+
+import { useDeleteComment } from "@/src/hooks/comment.hook";
+import { useUser } from "@/src/context/user.provider";
 
 const RecipeDetailsCommentFooter = ({
   commentId,

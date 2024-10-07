@@ -1,9 +1,8 @@
-import { useUser } from "@/src/context/user.provider";
+import { Avatar } from "@nextui-org/avatar";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+
 import { getAllRecipeComments } from "@/src/services/Comments";
 import { TComment } from "@/src/types";
-import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import RecipeDetailsCommentFooter from "./RecipeDetailsCommentFooter";
 
 const RecipeDetailsComment = async ({ id }: { id: string }) => {

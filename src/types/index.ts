@@ -45,7 +45,7 @@ export interface TRecipe {
   thumbnail: string;
   tags: string[];
   description: string;
-  user: string;
+  user: IUser | null;
   createdAt: string;
   updatedAt: string;
   __v: number;

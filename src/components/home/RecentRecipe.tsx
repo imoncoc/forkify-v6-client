@@ -39,7 +39,7 @@ const RecentRecipe = async () => {
                 <RecentRecipeCard
                   key={recipe._id}
                   recipe={recipe}
-                  refetchRecentPosts={refetchRecentPosts} // Passing the refetch function as prop
+                  // Passing the refetch function as prop
                 />
               ))}
             </div>

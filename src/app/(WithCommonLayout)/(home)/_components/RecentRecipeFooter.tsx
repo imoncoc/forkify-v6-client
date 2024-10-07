@@ -1,10 +1,11 @@
 "use client";
-import { TRecipe } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { CardFooter } from "@nextui-org/card";
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import React from "react";
 import ReactStars from "react-stars";
+
+import { TRecipe } from "@/src/types";
 
 const RecentRecipeFooter = ({ recipe }: { recipe: TRecipe }) => {
   const ratingChanged = (newRating: number) => {

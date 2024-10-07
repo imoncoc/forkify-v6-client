@@ -15,6 +15,7 @@ const RecipeDetailsPage = async ({ params }: any) => {
         <RecipeDetailsCard recipe={data} />
       </div>
       <div className="flex justify-center items-center p-4 bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-700">
+        {/* @ts-expect-error Server Component */}
         <RecipeDetailsComment id={data._id} />
       </div>
       <div>

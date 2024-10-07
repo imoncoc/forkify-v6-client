@@ -9,6 +9,7 @@ const MembershipPage = () => {
 
   return (
     <div>
+      {/* @ts-expect-error Server Component */}
       {!user?.premiumMembership && <NotPremiumMember userInfo={user!} />}
       {user?.premiumMembership && <PremiumMember />}
     </div>
