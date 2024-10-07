@@ -127,7 +127,6 @@ const TipTapEditor = () => {
       return; // Don't proceed further if data is missing
     }
 
-    console.log("userData: ", userData);
     handleAddNewRecipe(userData);
   };
 

@@ -99,6 +99,7 @@ export const getCurrentUser = async () => {
       status: decodedToken.status,
       address: decodedToken.address,
       userId: decodedToken.userId,
+      premiumMembership: decodedToken.premiumMembership,
     };
   }
 

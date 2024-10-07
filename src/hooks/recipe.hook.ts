@@ -4,6 +4,7 @@ import { toast } from "sonner";
 
 import {
   addNewRecipe,
+  followOrUnFollow,
   getRecentPost,
   getSingleRecipe,
   getUserRecipe,
@@ -53,6 +54,21 @@ export const useUserRatingsRecipe = () => {
     onSuccess: () => {
       toast.success("Added ratings successfully");
       // getRecentPost();
+    },
+    onError(error: any) {
+      toast.error(error?.message);
+    },
+  });
+};
+
+export const useFollowOrUnFollow = () => {
+  return useMutation<any, Error, FieldValues>({
+    mutationKey: ["FOLLOW_OR_UNFOLLOW"],
+    mutationFn: async (postData) => {
+      return await followOrUnFollow(postData);
+    },
+    onSuccess: () => {
+      toast.success("Follow or UnFollow successful");
     },
     onError(error: any) {
       toast.error(error?.message);

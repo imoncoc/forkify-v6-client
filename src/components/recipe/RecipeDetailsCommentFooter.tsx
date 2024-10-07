@@ -16,14 +16,9 @@ const RecipeDetailsCommentFooter = ({
   const { user } = useUser();
   const { mutate: handleToDeleteComment } = useDeleteComment();
 
-  console.log({ commentId, user, userID });
-
   const handleDeleteComment = () => {
-    console.log("handleDeleteComment: ", commentId);
     handleToDeleteComment(commentId);
   };
-
-  console.log(user?.userId === userID);
 
   return (
     <>

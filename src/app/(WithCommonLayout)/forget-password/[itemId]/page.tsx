@@ -7,7 +7,6 @@ import FXInputPassword from "@/src/components/form/FXInputPassword";
 
 const forgetPasswordId = () => {
   const onSubmit = (data: any) => {
-    console.log("data", data);
     toast.error("Something went wrong");
   };
 

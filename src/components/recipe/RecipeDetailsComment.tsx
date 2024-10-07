@@ -10,9 +10,6 @@ const RecipeDetailsComment = async ({ id }: { id: string }) => {
   const { data: comments } = await getAllRecipeComments(id);
   //   const [isFollowed, setIsFollowed] = useState(false);
 
-  console.log("comments: ", comments);
-  console.log("comment user: ", comments?.userId?._id);
-
   return (
     <>
       {comments.length === 0 && (

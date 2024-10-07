@@ -74,6 +74,7 @@ const RecipeDetailsCard = ({ recipe }: { recipe: TRecipe }) => {
             alt={title}
             className="w-full h-[500px] object-cover transition-transform transform hover:scale-110 duration-1000 ease-in-out"
             src={thumbnail}
+            style={{ filter: "brightness(0.7)" }}
           />
           {/* Frosted Glass Effect for Text Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent flex items-end p-6">

@@ -1,18 +1,19 @@
 "use client";
+import { TRecipe } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { CardFooter } from "@nextui-org/card";
 import { ArrowBigDown, ArrowBigUp } from "lucide-react";
 import React from "react";
 import ReactStars from "react-stars";
 
-const RecentRecipeFooter = ({ recipe }) => {
+const RecentRecipeFooter = ({ recipe }: { recipe: TRecipe }) => {
   const ratingChanged = (newRating: number) => {
     console.log(newRating);
   };
 
-  const handleViewDetails = (id: string) => {
-    console.log("id: ", id);
-  };
+  // const handleViewDetails = (id: string) => {
+  //   console.log("id: ", id);
+  // };
 
   return (
     <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">

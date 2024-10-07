@@ -5,8 +5,6 @@ import { jwtDecode } from "jwt-decode";
 
 import envConfig from "@/src/config/envConfig";
 import axiosInstance from "@/src/lib/AxiosInstance";
-import { revalidatePath } from "next/cache";
-import { toast } from "sonner";
 
 export const addNewRecipe = async (recipe: FieldValues): Promise<any> => {
   try {
@@ -43,9 +41,7 @@ export const getUserRecipe = async () => {
   }
 
   try {
-    const res = await axiosInstance.get(
-      `/user-recipe/${decodedToken?.userId}?limit=${2}`
-    );
+    const res = await axiosInstance.get(`/user-recipe/${decodedToken?.userId}`);
 
     return res.data;
   } catch (error: any) {
@@ -114,6 +110,19 @@ export const updateRatingsRecipe = async (
     const res = await axiosInstance.post(
       `/user-recipe/ratings/${id}`,
       userData
+    );
+
+    return res.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const followOrUnFollow = async (postData: FieldValues): Promise<any> => {
+  try {
+    const res = await axiosInstance.post(
+      `/auth/user/follow/${postData.userId}`,
+      postData?.userData
     );
 
     return res.data;

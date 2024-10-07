@@ -9,8 +9,6 @@ import {
   TableCell,
 } from "@nextui-org/table";
 import { Image } from "@nextui-org/image";
-
-import { TRecipe } from "@/src/types";
 import { Chip } from "@nextui-org/chip";
 import { Button } from "@nextui-org/button";
 import {
@@ -19,8 +17,10 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/dropdown";
-import { VerticalDotsIcon } from "../icons";
 import { Pagination } from "@nextui-org/pagination";
+
+import { VerticalDotsIcon } from "../icons";
+import { TRecipe } from "@/src/types";
 
 const RecipeTable = ({ userRecipeData }: { userRecipeData: any }) => {
   const [page, setPage] = useState(userRecipeData.page || 1);
@@ -29,12 +29,10 @@ const RecipeTable = ({ userRecipeData }: { userRecipeData: any }) => {
 
   useEffect(() => {
     // Update state when the backend data changes
-    setPage(userRecipeData.page || 1);
-    setTotalPages(userRecipeData.totalPage || 3);
-    setLimit(userRecipeData.limit || 2);
+    setPage(userRecipeData.data.meta.page || 1);
+    setTotalPages(userRecipeData.data.meta.totalPage || 1);
+    setLimit(userRecipeData.data.meta.limit || 10);
   }, [userRecipeData]);
-
-  console.log("userRecipeData: ", userRecipeData);
 
   const handleViewDetails = (id: string) => {
     console.log({ id });
