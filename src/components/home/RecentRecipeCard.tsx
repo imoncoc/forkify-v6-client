@@ -140,11 +140,11 @@ const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
               <span>{recipe.downvote.length}</span>
             </div>
 
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center  items-center gap-2">
               <ReactStars
                 color2={"#ffd700"}
                 count={5}
-                size={24}
+                size={20}
                 value={recipe.rating || 0}
                 onChange={ratingChanged}
               />

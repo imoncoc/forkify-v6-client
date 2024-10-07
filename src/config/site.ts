@@ -28,7 +28,7 @@ export const siteConfig = {
     },
     {
       label: "All Recipes",
-      href: "/all-recipes",
+      href: "/recipe",
     },
     {
       label: "About",

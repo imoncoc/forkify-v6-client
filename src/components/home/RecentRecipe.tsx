@@ -34,7 +34,7 @@ const RecentRecipe = async () => {
         {isLoading && <Loading />}
         {!isLoading && recipes && (
           <div className="container mx-auto">
-            <div className="py-32 grid grid-cols-2 md:grid-cols-3 gap-6 mx-4 md:mx-0">
+            <div className="py-32 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mx-4 md:mx-0">
               {recipes.map((recipe: any) => (
                 <RecentRecipeCard
                   key={recipe._id}

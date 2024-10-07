@@ -37,26 +37,14 @@ const Footer = () => {
               </div>
             </Link>
 
-            <Link
-              className="uppercase hover:text-strongCyan"
-              href={"/about-us"}
-            >
+            <Link className="uppercase hover:text-strongCyan" href={"/recipe"}>
+              All Recipes
+            </Link>
+            <Link className="uppercase hover:text-strongCyan" href={"/about"}>
               About Us
             </Link>
-            <Link
-              className="uppercase hover:text-strongCyan"
-              href={"/contact-us"}
-            >
+            <Link className="uppercase hover:text-strongCyan" href={"/contact"}>
               Contact Us
-            </Link>
-            <Link
-              className="uppercase hover:text-strongCyan"
-              href={"/facility-listing"}
-            >
-              Facility Listing
-            </Link>
-            <Link className="uppercase hover:text-strongCyan" href={"/booking"}>
-              Booking
             </Link>
           </div>
 
