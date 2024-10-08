@@ -167,7 +167,7 @@ const RecentRecipeCard = ({ recipe }: { recipe: TRecipe }) => {
             radius="full"
             size="sm"
             variant="shadow"
-            onClick={() => handleViewDetails(recipe?.user?._id!)}
+            onClick={() => handleViewDetails(recipe?._id!)}
           >
             View Details
           </Button>
